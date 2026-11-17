@@ -1,0 +1,616 @@
+/* =====================================================
+   1. CSS Variables & Base Styles
+   ===================================================== */
+:root {
+  --navy: #0e1a36;
+  --blue: #2457f5;
+  --blue-light: #9db8ff;
+  --grey-soft: #eef2f9;
+  --white: #ffffff;
+  --text-dark: #111b33;
+  --text-body: #33415c;
+  --text-muted: #5c6b84;
+  --border: #d8e0ee;
+  --radius: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-body);
+  background-color: var(--white);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+p, li {
+  max-width: 65ch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+section {
+  scroll-margin-top: 70px;
+}
+
+/* =====================================================
+   2. Container & Full-Width Bands
+   ===================================================== */
+.wrap {
+  width: min(960px, 90vw);
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.band {
+  padding-block: clamp(3.5rem, 6vw, 5.25rem);
+  position: relative;
+}
+
+.band-dark {
+  background-color: var(--navy);
+  background-image: radial-gradient(rgba(157, 184, 255, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--white);
+  overflow: hidden;
+}
+
+.band-dark h1,
+.band-dark h2,
+.band-dark h3 {
+  color: var(--white);
+}
+
+.band-light {
+  background-color: var(--grey-soft);
+}
+
+.band-white {
+  background-color: var(--white);
+}
+
+/* =====================================================
+   3. Sticky White Header + Scroll Progress Bar
+   ===================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-body);
+  border-radius: 6px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--blue);
+  background-color: var(--grey-soft);
+}
+
+.scroll-progress {
+  height: 3px;
+  width: 100%;
+  background: var(--blue);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: fill-scroll linear both;
+  animation-timeline: scroll(root);
+}
+
+@keyframes fill-scroll {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* =====================================================
+   4. Hero Section (Rings, Green Dot Badge, Two-Tone Name)
+   ===================================================== */
+#hero {
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
+.hero-rings {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 28px solid rgba(36, 87, 245, 0.12);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-rings::after {
+  content: "";
+  position: absolute;
+  inset: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(157, 184, 255, 0.2);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(157, 184, 255, 0.35);
+  color: #e4ecff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.4rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #34d399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
+}
+
+#hero h1 {
+  font-size: clamp(2.8rem, 8vw, 4.8rem);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.name-accent {
+  color: var(--blue-light);
+}
+
+.hero-bio {
+  font-size: 1.15rem;
+  color: #d5deef;
+  max-width: 40rem;
+}
+
+.bio-underline {
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--blue);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+/* =====================================================
+   5. Buttons
+   ===================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-light {
+  background-color: var(--white);
+  color: var(--navy);
+}
+
+.btn-light:hover {
+  background-color: var(--blue-light);
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--white);
+  color: var(--navy);
+}
+
+/* =====================================================
+   6. Key Facts
+   ===================================================== */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.fact-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid var(--blue);
+  border-radius: 6px;
+}
+
+.fact-value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.fact-label {
+  font-size: 0.88rem;
+  color: var(--blue-light);
+}
+
+/* =====================================================
+   7. Section Headings & Numbers
+   ===================================================== */
+.section-num {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.section-heading {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+/* =====================================================
+   8. Cards & Timeline
+   ===================================================== */
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.card-meta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 0.7rem;
+}
+
+.card ul {
+  padding-left: 1.2rem;
+}
+
+.card li {
+  margin-bottom: 0.35rem;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background-color: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-2rem + 1px);
+  top: 1.7rem;
+  width: 14px;
+  height: 14px;
+  background-color: var(--blue);
+  border: 3px solid var(--grey-soft);
+  border-radius: 50%;
+}
+
+/* =====================================================
+   9. Education
+   ===================================================== */
+.edu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.edu-row:first-child {
+  padding-top: 0;
+}
+
+.edu-row h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.edu-row p {
+  color: var(--text-muted);
+}
+
+.edu-year {
+  flex-shrink: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue);
+  background-color: var(--grey-soft);
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+}
+
+/* =====================================================
+   10. Skills
+   ===================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.skill-tile {
+  border-top: 4px solid var(--blue);
+}
+
+.skill-tile p {
+  color: var(--text-muted);
+}
+
+/* =====================================================
+   11. Printable Resume Sheet
+   ===================================================== */
+.resume-paper {
+  max-width: 780px;
+  padding: 2.5rem;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(14, 26, 54, 0.08);
+}
+
+.paper-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 3px solid var(--navy);
+}
+
+.paper-header h3 {
+  font-size: 1.7rem;
+}
+
+.paper-header p {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+}
+
+.paper-contact {
+  text-align: right;
+}
+
+.paper-section {
+  margin-bottom: 1.3rem;
+}
+
+.paper-section h4 {
+  font-size: 1.05rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.paper-section p {
+  margin-bottom: 0.3rem;
+}
+
+.paper-section ul {
+  padding-left: 1.2rem;
+}
+
+.paper-section li {
+  margin-bottom: 0.4rem;
+}
+
+/* =====================================================
+   12. Contact & Footer
+   ===================================================== */
+.contact-inner {
+  text-align: center;
+}
+
+.contact-kicker {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--blue-light);
+  margin-inline: auto;
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.25rem, 4.5vw, 2.3rem);
+  font-weight: 600;
+  border-bottom: 3px solid var(--blue);
+  word-break: break-word;
+}
+
+.contact-inner .hero-actions {
+  justify-content: center;
+}
+
+.site-footer {
+  background-color: #091226;
+  color: #b4c0da;
+  padding-block: 1.4rem;
+  font-size: 0.93rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-top {
+  color: var(--blue-light);
+  font-weight: 600;
+}
+
+.back-top:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   13. Responsive (Mobile)
+   ===================================================== */
+@media (max-width: 760px) {
+  .nav-list {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 0 0.6rem;
+    min-height: 40px;
+  }
+
+  .hero-rings {
+    width: 280px;
+    height: 280px;
+    right: -120px;
+  }
+
+  .facts,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edu-row,
+  .paper-header {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .paper-contact {
+    text-align: left;
+  }
+
+  .resume-paper {
+    padding: 1.5rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
+
+/* =====================================================
+   14. Print: only the resume sheet
+   ===================================================== */
+@media print {
+  .site-header,
+  #hero,
+  #experience,
+  #education,
+  #skills,
+  #contact,
+  .site-footer,
+  #resume .section-num,
+  #resume .section-heading {
+    display: none;
+  }
+
+  #resume {
+    padding: 0;
+  }
+
+  .resume-paper {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
